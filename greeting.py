@@ -10,3 +10,5 @@ today = date.today()
 tomorrow = datetime.date.today() + datetime.timedelta(days=1)
 
 two_days = today + datetime.timedelta(days=2)
+
+three_days = today + datetime.timedelta(days=3)
