@@ -1,3 +1,6 @@
-a = 6; b = 10
+a = "Here is Tom.  Tom is a boy.  Tom loves adventures."
 
-print(a,b)
+l = a.split()
+print(l)
+res = ' '.join(l)
+print(res)
