@@ -174,3 +174,4 @@ cython_debug/
 .pypirc
 .idea
 t.py
+t2.py
