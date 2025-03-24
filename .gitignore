@@ -173,6 +173,4 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 .idea
-t.py
-t2.py
 homework_test.py
