@@ -1,15 +1,22 @@
 #  пара ключ = значення
 # ключі унікальні і хешабельні(типи незмінні)
 
-my_dict = {'name': 'Denys', 'age': 33, 'has_a_job': True}
+my_dict = {'name': 'Bohdan',
+           "age": 33,
+           'has_a_job': True,
+           12: [1,2,3]}
+#{ key - only immutable, value - mutable/immutable}
 
 
 # set value
 my_dict['new_key'] = 'new_value'
+my_dict[(1,2,3,4,5)] = "my_tuple"
+print(my_dict)
 
 # print(my_dict)
-new_dict_for_update = {'one': 1, 'two': 2, 'None_value': None}
+new_dict_for_update = {'one': 1, 'two': 2, 'None_value': None, "name": "Yevhen"}
 my_dict.update(new_dict_for_update)
+print(my_dict)
 
 # print(my_dict)
 
@@ -18,9 +25,14 @@ my_dict['new_dict_as_a_value'] = new_dict_for_update
 print(my_dict)
 
 # get value
-# print(my_dict['name'])
-# print(my_dict['new_dict_as_a_value'])
-# print(my_dict['new_dict_as_a_value']['one'])
+my_dict = {'name': 'Bohdan',
+           "age": 33,
+           'has_a_job': True,
+           12: [1,2,3]}
+print(my_dict['car'])
+print(my_dict.get('car')) # get повертає значення ключа якщо клюс існує, якщо не існує то - None
+print(my_dict['new_dict_as_a_value'])
+print(my_dict['new_dict_as_a_value']['one'])
 
 # get without error
 print(my_dict.get('name1'))  # return None by default
@@ -53,4 +65,4 @@ age, name = name, age  # поміняти місцями
 print(name)
 print(age)
 
-# print(my_dict['name1'])  error
+print(my_dict['name1'])  # error

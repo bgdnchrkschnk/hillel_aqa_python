@@ -1,5 +1,4 @@
 # replace
-from losson_2.escaping import string_one
 
 # sent = 'My name is Bohdan. Really is Bohdan'
 #
