@@ -4,42 +4,62 @@ import random  # бібліотека для випадкових значень
 
 # while bool or condition
 #
-# while True:  # вічний цикл
-#     number = random.random()  # повертае випадоке число від 0 до 1
-#
-#     print(number)
-#     if number > 0.5:
-#         break
-
-
-tries = 5
-
-while tries > 0:
-    number = random.random()
-    print(number)
-    if number <= 0.5:
-        tries -= 1
-    else:
-        print('Found')
+counter = 0
+while True:  # вічний цикл
+    counter += 1
+    if counter == 6:
+        continue
+    if counter == 10:
         break
-print('Done')
+    print(counter)
 
-# request_1 = None
-# request_2 = None
+
+
+# ----------------
+counter = 0
+expected = 5
+
+while counter < expected:
+    print(f"Counter: {counter}")
+    counter += 1
+print("Expected number is reached!")
+
+tasks = ["login", "pay", "refund", "logout"]
+
+# for task in tasks:
+#     print("Doing", task)
 #
-# timer = 60
-
-# request_1.send()
-# while timer > 0:
-#     response = request_2.get_reponse()
-#     if response is None:
-#         time.sleep(1)
-#         timer = timer - 1
-#     else:
+# while bool(tasks):
+#     current_task = tasks.pop(0)
+#     print(f"Task in process: {current_task}")
+# print("All tasks done!")
+# attemps = 0
+# max_attempts = 5
+# while attempt < max_attempts:
+#     status = api.get_payment_status(order_id)
+#     if status == "success":
 #         break
+#     elif status == "failed":
+#         pytest.fail("Платіж завершився з помилкою")
+#     else:
+#         time.sleep(2)
+#         attempt += 1
+# else:
+#     pytest.fail("Статус платежу не змінився на success вчасно")
+#
+#
+# timeout = 10  # секунд
+# attempts = 0
+#
+# while elapsed < timeout:
+#     result = db_client.get_transaction_by_id(tran_id)
+#     if result:
+#         print("Транзакція з'явилася в базі")
+#         break
+#     time.sleep(1)
+#     attempts += 1
+# else:
+#     pytest.fail("Транзакція не з'явилась у базі за очікуваний час")
+#
 
-
-# x = 10
-# while x > 0:
-#     # do stth
 

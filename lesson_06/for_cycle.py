@@ -1,20 +1,20 @@
 names = ['Den', 'Alex', 'Georg']
-ages = [10, 20, 30]
-
-name = 'Den'
-
+# ages = [10, 20, 30]
+#
+# name = 'Den'
+#
 for name in names:
     print(name)
 
 #
-name = names[0]
-print(name)
-name = names[1]
-print(name)
-name = names[2]
-print(name)  # Georg
+# name = names[0]
+# print(name)
+# name = names[1]
+# print(name)
+# name = names[2]
+# print(name)  # Georg
 
-#
+
 # test_amounts = [100, 500, 1000]
 #
 # for amount in test_amounts:
@@ -29,7 +29,11 @@ print(name)  # Georg
 #     for amount in amounts:
 #         response = api_client.send_payment({"currency": currency, "amount": amount})
 #         assert response.status_code == 200
-
+        #
+# expected_status_code = 200
+# actual_status_code = 401
+#
+# assert expected_status_code != actual_status_code
 # names = ['Den', 'Alex', 'Georg']
 # ages = [10, 20, 30]
 #
@@ -40,5 +44,10 @@ print(name)  # Georg
 #         print(n)
 #
 #
-# for _ in range(10):
-#     print('Hello')
+counter = 0
+max_number = 5
+for index in range(10):
+    counter += 1
+    print(counter)
+    if counter == max_number:
+        break
