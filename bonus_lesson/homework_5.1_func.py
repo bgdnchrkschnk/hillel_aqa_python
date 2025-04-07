@@ -47,6 +47,10 @@ car_data = {
 search_criteria = (2017, 1.6, 36000)
 
 def filter_cars_by_criteria(incoming_dict: dict, year: int, engine_capacity: float, price: int, **kwargs) -> dict:
+  """
+  Filter incoming dict of cars by criterias
+  """
+
   if not kwargs.get("name"):
     result_dict: dict = {
       car: value for car, value in incoming_dict.items() if
