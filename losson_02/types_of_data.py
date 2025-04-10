@@ -49,3 +49,6 @@ print(not incoming_salary)
 
 l: list[int | str] = [1, 55, 8]
 
+
+number: int | float = 0.21
+
