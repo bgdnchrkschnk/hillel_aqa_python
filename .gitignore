@@ -174,4 +174,5 @@ cython_debug/
 .pypirc
 .idea
 homework_test.py
-t.py
+lesson_11/homework_doing.py
+/.env
