@@ -1,8 +1,12 @@
 import os
+import logging
 
 import pytest
-from assertpy import assert_that
-env = os.getenv("ENV")
+logging.basicConfig(
+    filename='basic_logs.log',
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
 
 def divide(x, y):
     return x / y
@@ -13,10 +17,12 @@ class TestExamples:
     BASE_URL = "http://example.com"
 
     def setup_class(self):
+        logging.info("Setting up the class")
         print("precondition setup")
 
     def test_sum_positive(self):
         print("HELLO I AM PRINT")
+        logging.info("testing logger")
         assert 1 + 2 == 3
         # assert_that(1+1).is_equal_to(3)
 

@@ -9,3 +9,5 @@ logging.info('Це повідомлення рівня INFO') # 2
 logging.warning('Це повідомлення рівня WARNING') # 3
 logging.error('Це повідомлення рівня ERROR') # 4
 logging.critical('Це повідомлення рівня CRITICAL') # 5
+
+
