@@ -1,17 +1,34 @@
 list_nums = range(0,11)
 
-# list_evens: list[int] = list(
-#     filter(lambda number: not number % 2, list_nums)
-# )
+list_evens: list[int] = list(
+    filter(lambda number: number % 2, list_nums)
+)
+
+def num_is_mot_even(number):
+    if number % 2 == 0:
+        return True
+
 #
-# list_evens_quads: list[int] = list(
-#     map(lambda number: number ** 4, list_nums)
-# )
+list_evens_quads: list[int] = list(
+    map(lambda number: number*2, list_nums)
+)
+
+def num_twice(number):
+    return number * 2
 # print(list_evens)
 # print(list_evens_quads)
 #
 #
-# print_name_func = lambda name: print(name)
+
+def some_function(name):
+    ...
+    print(name)
+
+
+some_function_lambda = lambda name, age: print(name) if age==18 else None
+
+some_function_lambda(name="Bohdan", age=18)
+
 #
 # print_name_func(name="Bohdan")
 #
