@@ -13,16 +13,12 @@ class Animal:
         self.name = name # attribute of instance of class
         self.color = color
         self.is_alive = is_alive
+        self.age = 5
 
     def speak(self): # methods of instance of class
         pass
 
 
-    def walk(self):
-        pass
-
-
-print(Animal.walk())
 
 
 
