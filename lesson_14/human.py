@@ -15,3 +15,6 @@ class Human:
 
 human_one = Human('Mykyta', 18, 'male')
 print(human_one.is_adult)
+
+print(dir(human_one))
+

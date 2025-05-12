@@ -1,63 +1,33 @@
-"""створіть функцію
-пошуку по group/number і повернення значення timingExbytes/incoming
-результат виведіть у консоль через логер на рівні інфо
-"""
-
-import pprint
-
-import xmltodict
-from pathlib import Path
 import logging
+import xmltodict
 
-# Створення логера
-logger = logging.getLogger(__name__)
+def return_incoming_grop_number(file_input: str, group_number: str):
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s')
 
-# Налаштування рівня логування
-logger.setLevel(logging.INFO)
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.INFO)
+    logging.getLogger('').addHandler(console_handler)
 
-# Створення обробника для виводу в stdout
-console_handler = logging.StreamHandler()
+    try:
+        with open(file=file_input) as xml_file:
+            data = xmltodict.parse(xml_file.read())
+    except FileNotFoundError as e:
+        logging.warning(f"{e}")
+        return None
 
-# Налаштування рівня логування для обробника
-console_handler.setLevel(logging.INFO)
+    found_group = False
 
-# Створення форматера для обробника
-formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-console_handler.setFormatter(formatter)
+    for number in (data['groups']['group']):
+        if number['number'] == group_number:
+            found_group = True
+            try:
+                incoming = number['timingExbytes']['incoming']
+                logging.info(f"timingExbytes/incoming for group/number {group_number} is {incoming}")
+                return incoming
+            except KeyError as e:
+                logging.info(f"timingExbytes/incoming for group/number {group_number} is empty")
 
-# Додавання обробника до логера
-logger.addHandler(console_handler)
-
-path_to_xml = Path("xml_files/groups.xml")
-
-
-def open_xml(xml_path):
-    with open(xml_path, "r") as file:
-        xml_string = file.read()
-        xml_converted: dict = xmltodict.parse(xml_string)
-        return xml_converted
-
-
-# pprint.pprint(open_xml(path_to_xml))
-
-
-data = open_xml(path_to_xml)
-
-groups = data["groups"]["group"]
-
-
-# print(groups)
-
-
-def get_incoming_by_group_number(xml: str, number_in_group):
-    for xml_group in groups:
-        number = xml_group.get("number")
-        if str(number) == str(number_in_group):
-            timing_exbyte = xml_group.get("timingExbytes")
-            if "incoming" in timing_exbyte:
-                incoming_number = timing_exbyte["incoming"]
-                logger.info(f"incoming number in group with number: {number_in_group}, is {incoming_number}")
-                # print(incoming_number)
-
-
-get_incoming_by_group_number(groups, 0)
+    if not found_group:
+        logging.warning(f"Group with number {group_number} not found.")
+    return None
+print(return_incoming_grop_number(file_input='xml_files/groups.xml', group_number='5'))

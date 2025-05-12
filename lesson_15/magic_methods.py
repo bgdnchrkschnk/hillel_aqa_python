@@ -1,7 +1,7 @@
-import random
+from random import randint
 
 
-class User():
+class User:
     def __init__(self, name: str, age: int):
         self.name: str = name
         self.age: int = age
@@ -55,7 +55,6 @@ kostya_user.mood = "Fine!"
 kostya_user.age = 1
 
 
-
 setattr(kostya_user, "is_employed", True)
 kostya_friends: list[User] = kostya_user.friends
 
@@ -67,8 +66,6 @@ print(kostya_friends_other_way)
 print(
     getattr(kostya_user, "is_employed")
 )
-
-
 
 
 # animal: Animal = Animal(name="animal", color="blue")

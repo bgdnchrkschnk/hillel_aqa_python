@@ -38,7 +38,7 @@ class AirTransport:
 class AmphibiousTransport(LandTransport, WaterTransport):
 
     def __init__(self, brand, model, amphibia_version):
-        LandTransport.__init__(brand, model)
+        super().__init__(brand, model)
         WaterTransport.__init__(self, model) # only in first
         self.amphibia_version = amphibia_version
         print("Amphibious combines water and land transport.")

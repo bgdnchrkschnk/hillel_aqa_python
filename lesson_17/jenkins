@@ -1,0 +1,10 @@
+JENKINS, DOCKER
+
+
+git clone - cloning repo
+python3 -m venv .venv - creating venv
+source .venv/bin/activate - activating of a venv
+pip install -r requirements.txt - installing all dependencies
+pytest -m regression
+
+
