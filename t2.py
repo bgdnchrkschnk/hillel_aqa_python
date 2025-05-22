@@ -1,28 +1,58 @@
-class Rhombus:
+# class Employee:
+#
+#     def __init__(self, name, salary):
+#         self.name = name
+#         self.salary = salary
+#
+# class Manager(Employee):
+#
+#     def __init__(self, name, salary, department):
+#         super().__init__(name, salary)
+#         self.department = department
+#
+# class Developer(Employee):
+#
+#     def __init__(self, name, salary, programing_language):
+#         super().__init__(name, salary)
+#         self.programing_language = programing_language
+#
+# class TeamLead(Manager, Developer):
+#
+#     def __init__(self, name, salary, department, programing_language, team_size):
+#         Employee.__init__(self, name, salary)
+#         self.department = department
+#         self.programing_language = programing_language
+#         self.team_size = team_size
+#
+#
+# Den = TeamLead(name="Den", salary=1000, department="AI", programing_language="C++", team_size=12)
 
-    def __setattr__(self, key, value):
-        if  key == "side_a" and value > 0:
-            print(f"'{key}' key - has been assigned to the value of: '{value}'")
-            super().__setattr__(key, value)
-        elif key == "side_a" and value <= 0:
-            print(f"'{key}' key- has been assigned to the value of: 'None'. '{key}' value should be > 0, please re-write this attribute!")
-            super().__setattr__(key,None)
-        elif key == "angle_a" and value <= 179:
-            print(f"'{key}' key - has been assigned to the value of: '{value}'")
-            super().__setattr__(key, value)
-            second_angle = 180 - value
-            setattr(self, "angle_b", second_angle)
-            print(f"'angle_b' key - has been assigned to the value of: '{second_angle}'")
-        elif key == "angle_a" and value > 179:
-            print(f"'{key}' key- has been assigned to the value of: 'None'. '{key}' value should be <= 179, please re-write this attribute!")
-            super().__setattr__(key,None)
-        elif key == "angle_b":
-            pass
-        else:
-            print(f"'{key}' key - has been assigned to the value of: '{value}'")
-            super().__setattr__(key, value)
+
+class Employee:
+    def __init__(self, name, salary, **kwargs):
+        self.name = name
+        self.salary = salary
+        super().__init__(**kwargs)
+
+class Manager(Employee):
+    def __init__(self, department, **kwargs):
+        self.department = department
+        super().__init__(**kwargs)
+
+class Developer(Employee):
+    def __init__(self, programming_language, **kwargs):
+        self.programming_language = programming_language
+        super().__init__(**kwargs)
+
+class TeamLead(Manager, Developer):
+    def __init__(self, name, salary, department, programming_language, team_size):
+        self.team_size = team_size
+        super().__init__(
+            name=name,
+            salary=salary,
+            department=department,
+            programming_language=programming_language
+        )
 
 
-my_rhombus: Rhombus = Rhombus()
-setattr(my_rhombus, "side_a", 10)
-setattr(my_rhombus, "angle_a", 179)
+d = {"one": 1, "two": 2, "three": 3}

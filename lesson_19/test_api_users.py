@@ -17,7 +17,6 @@ class TestUsers:
         # assert response.status_code in (201, 204, 200)
         assert response.ok # (201,200, 204)
         assert response_dict.get("id") is not None, f"id was not returned"
-        self.user_api_client.current_user_id = response_dict.get("id")
 
     def test_get_user_by_id_is_successful(self):
         # Creating a user like a precondition

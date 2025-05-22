@@ -15,11 +15,11 @@ class Rhombus:
 
     def __str__(self):
         return f"Rhombus: side = {self.side_of_rhombus}, angle A = {self.angle_a}, angle B = {self.angle_b}"
-#
-# d = Rhombus(side_of_rhombus=20, angle_a=60)
-# print(d.angle_a)
-# print(d.side_of_rhombus)
-# print(d.angle_b)
+
+d = Rhombus(side_of_rhombus=20, angle_a=60)
+print(d.angle_a)
+print(d.side_of_rhombus)
+print(d.angle_b)
 
 
 class Rhombus:
@@ -49,7 +49,7 @@ class Rhombus:
         return f"Rhombus: side = {self.side_a}, angle_a = {self.angle_a}, angle_b = {self.angle_b}"
 
 
-d = Rhombus(20,60)
-print(d.angle_a)
-print(d.side_a)
-print(d.angle_b)
+# d = Rhombus(20,60)
+# print(d.angle_a)
+# print(d.side_a)
+# print(d.angle_b)
