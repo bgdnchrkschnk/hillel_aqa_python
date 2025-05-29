@@ -1,4 +1,4 @@
-from lesson_20.database import PostresDB
+from utils.database import PostresDB
 import faker
 fake = faker.Faker()
 

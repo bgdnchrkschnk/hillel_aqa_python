@@ -11,6 +11,3 @@ def get_users_create_payload():
         "status":"active"
     }
     return data
-
-
-print(get_users_create_payload())

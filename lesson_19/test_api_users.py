@@ -1,9 +1,8 @@
-import pytest
 from requests import Response
 
-from lesson_19.api_client import UserApiClient
-from lesson_19.data_provider.users import get_users_create_payload
-from lesson_19.data_models.response_user import User
+from utils.api_client import UserApiClient
+from utils.data_provider.users import get_users_create_payload
+from utils.data_models.response_user import User
 from pydantic import ValidationError
 
 class TestUsers:

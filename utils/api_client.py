@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 from requests import Response
 
 load_dotenv()
-from lesson_19.data_provider.users import get_users_create_payload
 
 
 class BaseApiClient:
@@ -55,6 +54,21 @@ class UserApiClient(BaseApiClient):
 
     def replace_user(self, id, data: dict):
         return self._put(endpoint=f"{self.EDPOINT}/{id}", data=data)
+
+    @staticmethod
+    def get_query_for_user_insert(username: str, gender: str, email: str) -> str:
+        # У реальних проєктах — краще параметризований запит
+        return f"INSERT INTO users (username, gender, email) VALUES ('{username}', '{gender}', '{email}')"
+
+class UserPostApiClient(BaseApiClient):
+
+    def create_user_post(self, user_id: int, data: dict) -> Response:
+        endpoint: str = f"{BaseApiClient.BASE_URL}/users/{user_id}/posts"
+        return self._post(endpoint=endpoint, data=data)
+
+    @staticmethod
+    def get_query_for_user_post_insert(user_id_db: int, title: str, body: str) -> str:
+        return f"INSERT INTO posts (user_id, title, body) VALUES ('{user_id_db}', '{title}', '{body}')"
 
 
 
