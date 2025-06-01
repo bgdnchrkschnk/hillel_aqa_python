@@ -62,14 +62,13 @@ class UserApiClient(BaseApiClient):
 
 class UserPostApiClient(BaseApiClient):
 
-    def create_user_post(self, user_id: int, data: dict) -> Response:
+    def _create_user_post(self, user_id: int, data: dict) -> Response:
         endpoint: str = f"{BaseApiClient.BASE_URL}/users/{user_id}/posts"
         return self._post(endpoint=endpoint, data=data)
 
     @staticmethod
     def get_query_for_user_post_insert(user_id_db: int, title: str, body: str) -> str:
         return f"INSERT INTO posts (user_id, title, body) VALUES ('{user_id_db}', '{title}', '{body}')"
-
 
 
 
