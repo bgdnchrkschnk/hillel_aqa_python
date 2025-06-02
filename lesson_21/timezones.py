@@ -1,52 +1,42 @@
-from datetime import datetime
-from zoneinfo import ZoneInfo
+from datetime import datetime, UTC, timezone, timedelta
+from zoneinfo import ZoneInfo, available_timezones
 
-dt = datetime(2025, 5, 31, 12, 0, tzinfo=ZoneInfo("Europe/Kyiv"))
-print(dt)
+# filter timezones for europe
+# tz_europe = [tz for tz in available_timezones() if tz.startswith("Europe/")]
+# print(tz_europe)
 
+dt_kyiv = datetime(2025, 10, 10, 10, 10, 10, tzinfo=ZoneInfo('Europe/Kyiv'))
 
-# Converting between timezones
+# astimezone - використовуємо для конвертування між таймзонами
 
-from datetime import datetime
-from zoneinfo import ZoneInfo
+dt_tokyo = dt_kyiv.astimezone(ZoneInfo('Asia/Tokyo'))
+print(dt_kyiv)
+print(dt_tokyo)
 
-dt_kyiv = datetime(2025, 5, 31, 12, 0, tzinfo=ZoneInfo("Europe/Kyiv"))
-dt_ny = dt_kyiv.astimezone(ZoneInfo("America/New_York"))
+print(
+    dt_kyiv.time() == dt_tokyo.time()
+)
 
-print(f"Kyiv: {dt_kyiv}")
-print(f"New York: {dt_ny}")
-
-# -------
-
-now_utc = datetime.now(tz=ZoneInfo("UTC"))
-now_kyiv = now_utc.astimezone(ZoneInfo("Europe/Kyiv"))
-print(now_kyiv)
-
-# ------------------------------------ listing all supported timezones
-
-from zoneinfo import available_timezones
-
-# Це повертає множину з назвами усіх доступних таймзон
-all_timezones = available_timezones()
-
-# Наприклад, вивести перші 10
-for tz in sorted(list(all_timezones)):
-    print(tz)
-
-# ---------
-"""get region timezones"""
-
-tz_europe = [tz for tz in available_timezones() if tz.startswith("Europe/")]
-
-
-# Set timezone for datetime obj (NOT converting!)
+# встановити таймзону, або замінити
 """replace(tzinfo=...) не конвертує, а лише “призначає” таймзону (небезпечно для UTC → local).
 Краще створити datetime одразу з таймзоною або скористатися astimezone."""
+dt_tokyo = dt_kyiv.replace(tzinfo=ZoneInfo('Asia/Tokyo'))
+print(dt_tokyo)
 
-from zoneinfo import ZoneInfo
-from datetime import datetime
+# transaction_kyiv = datetime.now(tz=ZoneInfo('Europe/Kyiv'))
+# transaction_tbilisi = transaction_kyiv.astimezone(tz=ZoneInfo('Asia/Tbilisi'))
 
-dt = datetime(2024, 5, 30, 12, 0, 0)
-kyiv_time = dt.replace(tzinfo=ZoneInfo("Europe/Kyiv"))
-print(kyiv_time)
+tran_dt_kyiv = datetime(2025, 6, 2, 22, 1, 10, tzinfo=ZoneInfo('Europe/Kyiv'))
+tran_dt_tbilisi = tran_dt_kyiv.astimezone(tz=ZoneInfo('Asia/Tbilisi'))
+
+print(
+    tran_dt_kyiv
+)
+if tran_dt_tbilisi.day == tran_dt_kyiv.day:
+    print("Transaction is today!")
+else:
+    print("Transaction is tomorrow!")
+
+
+
 

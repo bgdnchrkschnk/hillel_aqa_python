@@ -1,41 +1,81 @@
-import requests
 import os
+from dotenv import load_dotenv
+import requests
+from requests import Response
+from pathlib import Path
+from urllib.parse import quote
 
-# Я задаю URL і параметри для запиту до NASA API
-url = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos'
-params = {
-    'sol': 1000,
-    'camera': 'fhaz',
-    'api_key': 'DEMO_KEY'  # Можу замінити на свій власний API-ключ
-}
+env_path = Path("new.env")
+load_dotenv(dotenv_path=env_path)
+base_url = os.getenv("bs_url")
 
-# Створюю папку для збереження фото, якщо вона ще не існує
-output_dir = 'mars_photos'
-os.makedirs(output_dir, exist_ok=True)
+image_path = "photo_2025-03-21_10-51-55.jpg"
 
-# Надсилаю GET-запит до API з вказаними параметрами
-response = requests.get(url, params=params)
-data = response.json()
+class BaseApi:
+    base_url = "http://127.0.0.1:8080"
 
-# Отримую перші 2 фото зі списку (якщо вони є)
-photos = data.get('photos', [])[:2]
+    def _get(self, endpoint: str,**kwargs):
+        return requests.get(url=endpoint)
+    def _post(self, endpoint: str, files: dict):
+        return requests.post(url=endpoint, files=files)
 
-# Проходжу по кожному фото і завантажую його
-for i, photo in enumerate(photos, start=1):
-    img_url = photo['img_src']
-    print(f'Завантаження фото {i}: {img_url}')
-    img_response = requests.get(img_url)
+    def _delete(self, endpoint: str):
+        return requests.delete(url=endpoint)
 
-    # Якщо запит успішний, зберігаю фото у файл
-    if img_response.status_code == 200:
-        file_path = os.path.join(output_dir, f'mars_photo{i}.jpg')
-        with open(file_path, 'wb') as f:
-            f.write(img_response.content)
-        print(f'Фото {i} збережено як {file_path}')
+
+class PhotoApi(BaseApi):
+    EDPOINT: str = f"{BaseApi.base_url}"
+
+    def upload_photo(self, image_file): # /upload
+        with open(image_file, "rb") as image_file:
+            files = {
+                "image": image_file
+            }
+            return self._post(endpoint=f"{self.EDPOINT}/upload", files= files)
+
+    def get_photo(self, file_name):  #/image/<filename>
+        head = {'Content-Type': 'text'}
+        return self._get(endpoint=f"{self.EDPOINT}/image/{file_name}", headers=head)
+
+    def delete_photo(self, filename):  #/delete/<filename>
+        return self._delete(endpoint=f"{self.EDPOINT}/delete/{filename}")
+
+
+
+
+
+def do_post_req(data):
+    """
+    Post запит
+    """
+    make_post = PhotoApi().upload_photo(data)
+    if make_post.status_code == 201:
+        return print(f"Успішний POST запит {make_post.status_code}\nДодатково: {make_post._content}\n")
     else:
-        # Якщо сталася помилка, виводжу повідомлення
-        print(f'Не вдалося завантажити фото {i}')
+        return print(f"Запит POST неуспішний: {make_post.status_code}\nДодатково: {make_post._content}\n")
 
-# Якщо фото не знайдено, виводжу відповідне повідомлення
-if not photos:
-    print("Фото не знайдено для вказаних параметрів.")
+def do_get_req(data):
+    """
+    Get запит
+    """
+    make_get = PhotoApi().get_photo(data)
+    if make_get.status_code == 200:
+        return print(f"Успішний GET запит {make_get.status_code}\nДодатково: {make_get._content}\n")
+    else:
+        return print(f"Запит GET неуспішний: {make_get.status_code}\nДодатково: {make_get._content}\n")
+
+
+def do_delete_req(data):
+    """
+    Delete запит
+    """
+    make_delete = PhotoApi().delete_photo(data)
+    if make_delete.status_code == 200:
+        return print(f"Успішний DELETE запит {make_delete.status_code}\nДодатково: {make_delete._content}\n")
+    else:
+        return print(f"Запит DELETE неуспішний: {make_delete.status_code}\nДодатково: {make_delete._content}\n")
+
+
+do_post_req(image_path)
+do_get_req(image_path)
+do_delete_req(image_path)
