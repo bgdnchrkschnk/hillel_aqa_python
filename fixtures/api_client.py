@@ -9,3 +9,4 @@ def user_api_client():
 @pytest.fixture
 def user_post_api_client():
     yield UserPostApiClient()
+
