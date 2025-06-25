@@ -16,7 +16,6 @@ class TestQAAuto:
     email = os.getenv("test_user_email")
     password = os.getenv("test_user_password")
 
-
     def test_qa_auto_login_get_userdata_and_logout(self):
         try:
             print(self.email, self.password)
