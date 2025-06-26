@@ -19,9 +19,9 @@ console_handler.setFormatter(formatter)
 # Додавання обробника до логера
 logger.addHandler(console_handler)
 
-# Логування подій
-logger.debug('Це повідомлення рівня DEBUG')
-logger.info('Це повідомлення рівня INFO')
-logger.warning('Це повідомлення рівня WARNING')
-logger.error('Це повідомлення рівня ERROR')
-logger.critical('Це повідомлення рівня CRITICAL')
+# # Логування подій
+# logger.debug('Це повідомлення рівня DEBUG')
+# logger.info('Це повідомлення рівня INFO')
+# logger.warning('Це повідомлення рівня WARNING')
+# logger.error('Це повідомлення рівня ERROR')
+# logger.critical('Це повідомлення рівня CRITICAL')
