@@ -8,7 +8,7 @@ content = {'cars': ['Audi, VW', 'Toyota']}
 updated_content = {'bikes': ['Honda', 'Suzuki']}
 
 
-class TestContent:
+class TestFlaskContent:
 
     BASE_URL = 'http://127.0.0.1:7070'
 
