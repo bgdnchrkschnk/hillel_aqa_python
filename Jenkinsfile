@@ -27,7 +27,10 @@ pipeline {
         }
         stage('Run tests') {
             steps {
-                sh 'pytest -m TestFlaskContent'
+                sh '''#!/bin/bash
+                source .venv/bin/activate
+                pytest -m TestFlaskContent'''
+
             }
         }
     }
