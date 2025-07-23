@@ -21,7 +21,7 @@ class TestFlaskContent:
             logger.error(f"It wa expected status code 200 but got {response_data.status_code}")
             raise AssertionError(f"It wa expected status code 200 but got {response_data.status_code}")
 
-        if not response_data.json().get('message') == 'Content created successfully!!':
+        if not response_data.json().get('message') == 'Content created successfully!':
             logger.error(f"Unexpected response body message.\nExpected 'Content created successfully!!' but got {response_data.json().get('message')}")
             raise AssertionError(f"Unexpected response body message but got {response_data.json().get('message')}")
 
