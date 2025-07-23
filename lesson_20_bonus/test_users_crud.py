@@ -65,7 +65,9 @@ class TestUsersAndPostsCreation:
                                                               body=user_post_data["body"])
         db_client.mutation(query=query)
 
-        assert len(db_client.select(f"SELECT * FROM posts WHERE user_id='{user_id_in_db}' and title='{user_post_data["title"]}' and body='{user_post_data["body"]}'"))
+        assert len(db_client.select(
+            f"SELECT * FROM posts WHERE user_id='{user_id_in_db}' AND title='{user_post_data['title']}' AND body='{user_post_data['body']}'"
+        ))
 
 
 
